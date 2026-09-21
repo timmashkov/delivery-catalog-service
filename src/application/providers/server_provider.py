@@ -2,7 +2,7 @@ from dishka import Provider, Scope, provide
 
 from application.config import Settings
 from application.server import APIServer
-from presentation.routers import product_router
+from presentation.routers import product_router, category_router
 
 
 class ServerProvider(Provider):
@@ -11,5 +11,5 @@ class ServerProvider(Provider):
         """Создаёт экземпляр APIServer с инжектированными settings."""
         return APIServer(
             settings=settings,
-            routers=[product_router],
+            routers=[product_router, category_router],
         )
