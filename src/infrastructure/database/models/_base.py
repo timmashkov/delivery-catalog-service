@@ -10,6 +10,8 @@ class _Base(DeclarativeBase):
     @declared_attr.directive
     def __tablename__(cls) -> str:
         table_name = cls.__name__
+        if table_name.endswith("y"):
+            table_name = table_name[:-1] + "ie"
         result = table_name[0] + "".join(map(lambda x: "_" + x if x.istitle() else x, table_name[1:]))
         return f"{result.lower()}s"
 

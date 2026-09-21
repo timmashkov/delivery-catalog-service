@@ -1,2 +1,3 @@
+from .product_use_case import ProductUseCase
 
-__all__: tuple[str] = ()
+__all__: tuple[str] = ("ProductUseCase", )
