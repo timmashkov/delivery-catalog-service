@@ -1,8 +1,8 @@
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, ForwardRef
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from infrastructure.database.models import Category
 from presentation.models.patched_filter import PatchedFilter
@@ -17,12 +17,22 @@ class CreateCategoryModel(BaseModel):
     parent_uuid: UUID | None = None
 
 
+class ReadCategoryChildModel(BaseModel):
+    name: str
+    description: str | None
+    parent_uuid: UUID | None
+    uuid: UUID
+    created_at: datetime
+    updated_at: datetime
+
+
 class ReadCategoryModel(CreateCategoryModel):
     uuid: UUID
     created_at: datetime
     updated_at: datetime
-    #products: list["ReadProductModel"] | None = []
-
+    children: list[ReadCategoryChildModel] = Field(
+        default_factory=list
+    )
 
 class CategoryFilter(PatchedFilter):
     uuid: UUID | None = None

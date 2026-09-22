@@ -7,11 +7,10 @@ from infrastructure.database import UnitOfWork, RepositoryMixin, Category, categ
 
 class CategoryUseCase(RepositoryMixin):
 
-    _query_modifier = category_query_modifier
-
     def __init__(self, unit_of_work: UnitOfWork) -> None:
         self._unit_of_work = unit_of_work
         self._model = Category
+        self._query_modifier = category_query_modifier
 
     async def get_categories_list(self, filters: Filter) -> list:
         async with self.read_repository() as read_repository:

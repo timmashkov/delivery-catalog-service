@@ -10,4 +10,4 @@ def product_query_modifier(query: select) -> select:
 
 
 def category_query_modifier(query: select) -> select:
-    return query.options(selectinload(Category.children))
+    return query.options(joinedload(Category.children))
